@@ -5,19 +5,24 @@ const signupFormHandler = async function (event) {
     const passwordEl = document.querySelector('#password-input-signup').value.trim();
 
     if(passwordEl.length >= 8 && userNameEl) {
+        try {
+            const resp = await fetch('/api/users', {
+                method: 'POST',
+                body: JSON.stringify({
+                    userName: userNameEl,
+                    password: passwordEl,
+                }),
+                headers: {'Content-Type': 'application/json'},
+            });
 
-        const resp = await fetch('/api/users', {
-            method: 'POST',
-            body: JSON.stringify({
-                userName: userNameEl,
-                password: passwordEl,
-            }),
-            headers: {'Content-Type': 'application/json'},
-        });
-
-        if (resp.ok) {
-            document.location.replace('/');
-        } else {
+            if (resp.ok) {
+                document.location.replace('/');
+            } else {
+                const message = await resp.json();
+                alert(`Sign-up Failed! ${message.error || 'Unknown error'}`);
+            }
+        } catch (err) {
+            console.error('Error during signup:', err);
             alert('Sign-up Failed!');
         }
     } else {
@@ -26,4 +31,4 @@ const signupFormHandler = async function (event) {
 };
 
 // add event listener
-document.querySelector('#signup-from').addEventListener('submit', signupFormHandler);
+document.querySelector('#signup-form').addEventListener('submit', signupFormHandler);

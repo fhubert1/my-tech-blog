@@ -5,20 +5,25 @@ const commentHandler = async function (event) {
     const body = document.querySelector('textarea[name="comment-body"]').value;
 
     if (body) {
-        const resp = await fetch('/api/comments', {
-            method: 'POST',
-            body: JSON.stringify({
-                postId,
-                body,
-            }),
-            headers: {'Content-Type': 'application/json'},
-        });
+        try {
+            const resp = await fetch('/api/comments', {
+                method: 'POST',
+                body: JSON.stringify({
+                    postId,
+                    body,
+                }),
+                headers: {'Content-Type': 'application/json'},
+            });
 
-        if(resp.ok) {
-            document.location.reload();
-        } else {
-            document.location.replace('/login');
-        }
+            if(resp.ok) {
+                document.location.reload();
+            } else {
+                document.location.replace('/login');
+            }
+        } catch (err) {
+            console.error('Error creating comment:', err);
+            alert('Comment Failed!');
+        }            
     }
 };
 

@@ -6,24 +6,35 @@ const editPostHandler = async function(event) {
     const title = document.querySelector('input[name="post-title"]').value;
     const body = document.querySelector('textarea[name="post-body"]').value;
 
-    await fetch(`/api/posts/${postId}`, {
-        method: 'POST',
-        body: JSON.stringify({
-            title,
-            body,
-        }),
-        headers: {'Content-Type': 'application/json'},
-    });
+    try {
+        await fetch(`/api/posts/${postId}`, {
+            method: 'POST',
+            body: JSON.stringify({
+                title,
+                body,
+            }),
+            headers: {'Content-Type': 'application/json'},
+        });
 
-    document.location.replace('/dashboar');
+        document.location.replace('/dashboar');
+    } catch (err) {
+        console.error('Error editing post:', err);
+        alert('Edit Post Failed!');
+    }        
 };
 
 // delete post by id
 const deleteHandler = async function() {
-    await fetch(`/api/posts/${postId}`, {
-        method: 'DELETE',
-    });
-    document.location.replace('/dashboard');
+    try {
+        await fetch(`/api/posts/${postId}`, {
+            method: 'DELETE',
+        });
+        document.location.replace('/dashboard');
+
+    } catch (err) {
+        console.error('Error deleting post:', err);
+        alert('Delete Post Failed!');
+    }        
 };
 
 // add event handler to edit post
