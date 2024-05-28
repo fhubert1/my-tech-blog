@@ -3,11 +3,67 @@
 ## Description
 Task is to build a CMS-style blog website using Model-View-Controller concepts similar to a Wordpress site.  You can publish and comment on blog.  The views use Handelebars and Sequelize as the ORM along with express-session for authentication.
 
+[repo](https://github.com/fhubert1/my-tech-blog)
+
+
+## Table of Contents
+- [Installation](#installation)
+- [Configuration](#configuration)
+- [Running the Application](#running-the-application)
+- [Screenshots](#screenshots)
+- [Deployment](#deployment)
+- [User Story](#User Story)
+- [Acceptance Criteria](#Acceptance Criteria)
+
+
+## Installation
+
+1. Clone the repository:
+    ```sh
+    git clone https://github.com/fhubert1/my-tech-blog.git
+    cd your-repo
+    ```
+
+## Configuration
+
+1. Create a `.env` file in the root directory of your project and add the following environment variables:
+    ```env
+    PORT=3001
+    DB_HOST=your_database_host
+    DB_USER=your_database_user
+    DB_PASS=your_database_password
+    DB_NAME=your_database_name
+    ```
+2. Ensure your database is set up and accessible with the credentials provided in the `.env` file.
+
+## Running the Application
+1. Start the application:
+    ```sh
+    npm start
+    ```
+
+2. Open your browser and navigate to `http://localhost:3001`.
+
+## Screenshots
+![Homepage](./images/homepage.jpg)
+
+![Login](./images/login.jpg)
+
+![NewPost](./images/new_post.jpg)
+
+![EditPost](./images/edit_post.jpg)
+
+
+## Deployment
+[My Tech Blog](https://my-tech-blog-q9dh.onrender.com)
+
+
 ## User Story
 AS A developer who writes about tech
 
 I WANT a CMS-style blog site
 SO THAT I can publish articles, blog posts, and my thoughts and opinions
+
 
 ## Acceptance Criteria
 GIVEN a CMS-style blog site
@@ -59,8 +115,4 @@ THEN I am signed out of the site
 
 WHEN I am idle on the site for more than a set time
 THEN I am able to view posts and comments but I am prompted to log in again before I can add, update, or delete posts
-
-
-## Deployment
-![My Tech Blog](https://my-tech-blog-q9dh.onrender.com)
 
