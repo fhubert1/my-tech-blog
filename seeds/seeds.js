@@ -22,3 +22,6 @@ const seedDatabase = async () => {
 };
 
 seedDatabase();
+
+// export the seed data so that it is available in the server.js file
+module.exports = seedDatabase;

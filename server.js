@@ -8,6 +8,9 @@ const helpers = require('./utils/helpers');
 const sequelize = require('./config/connection');
 const SequelizeStore = require('connect-session-sequelize')(session.Store);
 
+// import seeds file
+const seedDataBase = require('./seeds/seeds');
+
 const app = express();
 const PORT = process.env.PORT || 3001;
 
@@ -40,6 +43,23 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(routes);
 
-sequelize.sync({ force: false }).then(() => {
+// start the server after determine to execute seeding first
+const startServer = () => {
   app.listen(PORT, () => console.log(`Now listening on ${PORT}`));
-});
+};
+
+if (process.env.RUN_SEEDS === 'true') {
+  // try seeding the database
+  seedDataBase().then(() => {
+      console.log('Seeding completed!');
+      sequelize.sync({ force: false }).then(startServer);
+  }).catch(err => {
+      console.error('Error during Seeding process: ', err);
+      // Still start server even if seeding fails
+      sequelize.sync({ force: false }).then(startServer);
+  });
+} else {
+  // no seeding - just start server
+  sequelize.sync({ force: false }).then(startServer);
+}
+
