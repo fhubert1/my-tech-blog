@@ -48,18 +48,22 @@ const startServer = () => {
   app.listen(PORT, () => console.log(`Now listening on ${PORT}`));
 };
 
-if (process.env.RUN_SEEDS === 'true') {
-  // try seeding the database
-  seedDataBase().then(() => {
-      console.log('Seeding completed!');
-      sequelize.sync({ force: false }).then(startServer);
-  }).catch(err => {
-      console.error('Error during Seeding process: ', err);
-      // Still start server even if seeding fails
-      sequelize.sync({ force: false }).then(startServer);
-  });
-} else {
-  // no seeding - just start server
-  sequelize.sync({ force: false }).then(startServer);
-}
+// Sync Sequelize and start server with or without seeding
+const initializeServer = async () => {
+  try {
+      if (process.env.RUN_SEEDS === 'true') {
+          console.log('Running seeds...');
+          await seedDatabase();
+          console.log('Seeding completed!');
+      }
+      await sequelize.sync({ force: false });
+      startServer();
+  } catch (err) {
+      console.error('Error during initialization:', err);
+      process.exit(1); // Exit the process with failure
+  }
+};
+
+initializeServer();
+
 

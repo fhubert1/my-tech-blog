@@ -5,7 +5,7 @@ const userData = require('./userData.json');
 const postData = require('./postData.json');
 
 const seedDatabase = async () => {
-    await sequelize.sync({ force: true });
+    await sequelize.sync({ force: false });
 
     const users = await User.bulkCreate(userData, {
         individualHooks: true,
@@ -20,8 +20,6 @@ const seedDatabase = async () => {
     }
     process.exit(0);
 };
-
-seedDatabase();
 
 // export the seed data so that it is available in the server.js file
 module.exports = seedDatabase;
