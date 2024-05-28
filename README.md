@@ -12,8 +12,8 @@ Task is to build a CMS-style blog website using Model-View-Controller concepts s
 - [Running the Application](#running-the-application)
 - [Screenshots](#screenshots)
 - [Deployment](#deployment)
-- [User Story](#User Story)
-- [Acceptance Criteria](#Acceptance Criteria)
+- [User Story](#User-Story)
+- [Acceptance Criteria](#Acceptance-Criteria)
 
 
 ## Installation
@@ -33,6 +33,7 @@ Task is to build a CMS-style blog website using Model-View-Controller concepts s
     DB_USER=your_database_user
     DB_PASS=your_database_password
     DB_NAME=your_database_name
+    RUN_SEEDS='true/false'
     ```
 2. Ensure your database is set up and accessible with the credentials provided in the `.env` file.
 
