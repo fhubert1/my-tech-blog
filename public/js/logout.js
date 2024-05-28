@@ -9,7 +9,7 @@ const logout = async () => {
         if (resp.ok) {
             document.location.replace('/');
         } else {
-            alert(respons.statusText);
+            alert(resp.statusText);
         }
         
     } catch (err) {

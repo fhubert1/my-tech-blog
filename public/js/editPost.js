@@ -16,7 +16,7 @@ const editPostHandler = async function(event) {
             headers: {'Content-Type': 'application/json'},
         });
 
-        document.location.replace('/dashboar');
+        document.location.replace('/dashboard');
     } catch (err) {
         console.error('Error editing post:', err);
         alert('Edit Post Failed!');
