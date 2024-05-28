@@ -18,7 +18,7 @@ const seedDatabase = async () => {
             userId: users[Math.floor(Math.random() * users.length)].id, 
         });
     }
-    process.exit(0);
+
 };
 
 // export the seed data so that it is available in the server.js file
