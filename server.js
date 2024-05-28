@@ -9,7 +9,7 @@ const sequelize = require('./config/connection');
 const SequelizeStore = require('connect-session-sequelize')(session.Store);
 
 // import seeds file
-const seedDataBase = require('./seeds/seeds');
+const seedDatabase = require('./seeds/seeds');
 
 const app = express();
 const PORT = process.env.PORT || 3001;
